@@ -2,32 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntitiesManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
+    // Map
+    [Header("TileMap")]
+    public int mapSideLenght;
+
+    public GameObject floor;
+
+    public Sprite virusFloor;
+    public Sprite virusBubblesFloor;
+    public Sprite bodyFloor;
+
+    public List<GameObject> floorTiles = new();
+
+    // Behaviour
+    [Header("Behaviour")]
     public List<GameObject> playerBases = new List<GameObject>();
-    public List<GameObject> EnemyBases = new List<GameObject>();
+    public List<GameObject> enemyBases = new List<GameObject>();
     public List<GameObject> enemyList = new List<GameObject>();
     public List<GameObject> playerList = new List<GameObject>();
     //public List<Transform> zonasLibres = new List<Transform>();
 
-    public static EntitiesManager Instance;
+    public static GameManager Instance;
 
-    //Singleton
-    void Awake() {
-        if (Instance == null) {
-            Instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
+    // Start is called before the first frame update
+    void Start()
+    {
+        GenerateMap();
     }
 
-    void Start() {
-        // Busca y llena las listas con los objetos de la escena usando tags
-        FillListWithTag(playerBases, "PlayerBase");
-        FillListWithTag(EnemyBases, "EnemyBase");
-        FillListWithTag(enemyList, "EnemyMinion");
-        FillListWithTag(playerList, "PlayerMinion");
-        //FillListWithTag(zonasLibres, "ZonaLibre");
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    
+    private void GenerateMap() {
+        for (int x = 0; x < mapSideLenght; x++)
+        {
+            for (int y = 0; y < mapSideLenght; y++)
+            {
+                floorTiles.Add(Instantiate(floor, new Vector3(x, y, 0), Quaternion.identity));
+            }
+        }
     }
 
     private void FillListWithTag(List<GameObject> list, string tag) {
@@ -47,11 +65,11 @@ public class EntitiesManager : MonoBehaviour {
     }
 
     public void AddEnemyBase(GameObject enemyBase) {
-        EnemyBases.Add(enemyBase);
+        enemyBases.Add(enemyBase);
     }
 
     public void RemoveEnemyBase(GameObject enemyBase) {
-        EnemyBases.Remove(enemyBase);
+        enemyBases.Remove(enemyBase);
     }
 
     public void AddEnemy(GameObject Enemy) {
@@ -76,7 +94,7 @@ public class EntitiesManager : MonoBehaviour {
     }*/
 
     public GameObject GetClosestElement(Transform reference, string targetTag) {
-        List<GameObject>[] enemyLists = { EnemyBases/*, enemyList, zonasLibres*/ };
+        List<GameObject>[] enemyLists = { enemyBases/*, enemyList, zonasLibres*/ };
         List<GameObject>[] playerLists = { playerBases/*, playerList, zonasLibres*/ };
 
         if (targetTag == "EnemyMinion") {
@@ -93,7 +111,7 @@ public class EntitiesManager : MonoBehaviour {
         GameObject closest = null;
         float closestDistance = Mathf.Infinity;
 
-        // Busca el elemento más cercano en las listas que corresponden según si es player o enemy
+        // Busca el elemento mï¿½s cercano en las listas que corresponden segï¿½n si es player o enemy
         foreach (var list in currentList) {
             foreach (var element in list) {
                 float distance = Vector3.Distance(reference.position, element.transform.position);

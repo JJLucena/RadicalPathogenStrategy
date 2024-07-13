@@ -23,16 +23,16 @@ public class DestroyableObject : MonoBehaviour
     void RemoveCurrentElementToList() {
         switch (typeSelected) {
             case Type.PlayerMinion:
-                EntitiesManager.Instance.RemovePlayer(this.gameObject);
+                GameManager.Instance.RemovePlayer(this.gameObject);
                 break;
             case Type.EnemyMinion:
-                EntitiesManager.Instance.RemoveEnemy(this.gameObject);
+                GameManager.Instance.RemoveEnemy(this.gameObject);
                 break;
             case Type.PlayerBase:
-                EntitiesManager.Instance.RemovePlayerBase(this.gameObject);
+                GameManager.Instance.RemovePlayerBase(this.gameObject);
                 break;
             case Type.EnemyBase:
-                EntitiesManager.Instance.RemoveEnemyBase(this.gameObject);
+                GameManager.Instance.RemoveEnemyBase(this.gameObject);
                 break;
         }
     }

@@ -22,7 +22,6 @@ public class Entity : MonoBehaviour {
     private Rigidbody2D rb;
     private bool canAttack = true;
     private Coroutine canAttackCorrutine;
-    private RayDrawer ray;
 
     private enum State {
         GetTarget,
@@ -34,7 +33,6 @@ public class Entity : MonoBehaviour {
         
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        ray = GetComponent<RayDrawer>();
 
         currentState = State.GetTarget;
     }
@@ -86,7 +84,7 @@ public class Entity : MonoBehaviour {
             RadiusDetection();
 
             // If no player detected, get the closest target from the list
-            target = EntitiesManager.Instance.GetClosestElement(this.transform, targetTag);
+            target = GameManager.Instance.GetClosestElement(this.transform, targetTag);
         }
 
         if (target != null) {
@@ -124,16 +122,10 @@ public class Entity : MonoBehaviour {
                 StopCoroutine(canAttackCorrutine);
             StartCoroutine(CooldownAttack());
 
-            // Animación o efecto de sonido para el ataque
-            if (targetTag == "EnemyMinion") {
-                if (target != null) ray.DrawRay(transform, target.transform, Color.white);  //Player
-            }
-            else if (targetTag == "PlayerMinion") {
-                if (target != null) ray.DrawRay(transform, target.transform, Color.red);    //Enemy
-            }
+            // Animaciï¿½n o efecto de sonido para el ataque
             //Debug.Log(this.gameObject.name + " attack " + target.gameObject.name);
 
-            // Suponiendo que el objetivo tiene un script con un método 'TakeDamage'
+            // Suponiendo que el objetivo tiene un script con un mï¿½todo 'TakeDamage'
             target.GetComponent<DestroyableObject>().TakeDamage(damage);
 
         }
@@ -154,13 +146,9 @@ public class Entity : MonoBehaviour {
         currentState = State.GetTarget;
     }
 
-    private void OnDestroy() {
-        StopAllCoroutines();
-    }
-
 #if UNITY_EDITOR
     void OnDrawGizmosSelected() {
-            // Dibujar el radio de visión en el editor
+            // Dibujar el radio de visiï¿½n en el editor
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, visionRadius);
             // Dibujar el rango de ataque en el editor
