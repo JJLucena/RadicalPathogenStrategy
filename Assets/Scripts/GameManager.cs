@@ -30,6 +30,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GenerateMap();
+
+        // Busca y llena las listas con los objetos de la escena usando tags
+        FillListWithTag(playerBases, "PlayerBase");
+        FillListWithTag(enemyBases, "EnemyBase");
+        FillListWithTag(enemyList, "EnemyMinion");
+        FillListWithTag(playerList, "PlayerMinion");
     }
 
     // Update is called once per frame

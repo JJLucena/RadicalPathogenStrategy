@@ -1,21 +1,23 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using System.Net;
 
 [RequireComponent(typeof(LineRenderer))]
 public class RayDrawer : MonoBehaviour {
-    public float displayDuration = 2f;
+    public float displayDuration = 0.2f;
     public float laserSpeed = 0.0001f;
 
     private LineRenderer lineRenderer;
 
     void Start() {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startWidth = 0.2f;
-        lineRenderer.endWidth = 0.1f;
     }
 
     public void DrawRay(Transform startPoint, Transform endPoint, Color rayColor) {
+        Debug.Log("Ray");
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.1f;
         lineRenderer.startColor = rayColor;
         lineRenderer.endColor = rayColor;
 
@@ -27,6 +29,7 @@ public class RayDrawer : MonoBehaviour {
     }
 
     IEnumerator DrawRayCorrutine(Transform startPoint, Transform endPoint) {
+        lineRenderer.enabled = true;
         float elapsedTime = 0f;
 
         while (elapsedTime < displayDuration) {
@@ -53,4 +56,17 @@ public class RayDrawer : MonoBehaviour {
 
         lineRenderer.enabled = false;
     }
+    /*IEnumerator DrawRay(Transform startPoint, Transform endPoint) {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < displayDuration) {
+            lineRenderer.SetPosition(0, startPoint.position);
+            lineRenderer.SetPosition(1, endPoint.position);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        lineRenderer.enabled = false;
+    }*/
 }

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableObject : MonoBehaviour
-{
+public class DestroyableObject : MonoBehaviour {
+    [SerializeField] GameManager gameManager;
+
     [Header("Health")]
     [SerializeField] int maxHealth = 100;
     [SerializeField] float health;
@@ -18,21 +19,24 @@ public class DestroyableObject : MonoBehaviour
 
     void Start() {
         health = maxHealth;
+
+        if (!gameManager)
+            gameManager = FindObjectOfType<GameManager>();
     }
 
     void RemoveCurrentElementToList() {
         switch (typeSelected) {
             case Type.PlayerMinion:
-                GameManager.Instance.RemovePlayer(this.gameObject);
+                gameManager.RemovePlayer(this.gameObject);
                 break;
             case Type.EnemyMinion:
-                GameManager.Instance.RemoveEnemy(this.gameObject);
+                gameManager.RemoveEnemy(this.gameObject);
                 break;
             case Type.PlayerBase:
-                GameManager.Instance.RemovePlayerBase(this.gameObject);
+                gameManager.RemovePlayerBase(this.gameObject);
                 break;
             case Type.EnemyBase:
-                GameManager.Instance.RemoveEnemyBase(this.gameObject);
+                gameManager.RemoveEnemyBase(this.gameObject);
                 break;
         }
     }

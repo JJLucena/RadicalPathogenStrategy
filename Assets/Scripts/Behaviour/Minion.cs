@@ -24,6 +24,7 @@ public class Entity : MonoBehaviour {
     private bool canAttack = true;
     private Coroutine canAttackCorrutine;
     private RayDrawer ray;
+    private MeleeAttack meleeAttack;
 
     private enum State {
         GetTarget,
@@ -36,8 +37,12 @@ public class Entity : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         ray = GetComponent<RayDrawer>();
+        meleeAttack = GetComponentInChildren<MeleeAttack>();
 
         currentState = State.GetTarget;
+
+        if(!gameManager)
+            gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update() {
@@ -126,16 +131,25 @@ public class Entity : MonoBehaviour {
             StartCoroutine(CooldownAttack());
 
             // Animaci�n o efecto de sonido para el ataque
-            if (targetTag == "EnemyMinion") {
-                if (target != null) ray.DrawRay(transform, target.transform, Color.white);  //Player
+            if (target != null && targetTag == "EnemyMinion") {
+                if (meleeAttack)
+                    meleeAttack.Attack(damage);
+                else {
+                    ray.DrawRay(transform, target.transform, Color.white);  //Player
+                    target.GetComponent<DestroyableObject>().TakeDamage(damage);
+                }
+                    
             }
-            else if (targetTag == "PlayerMinion") {
-                if (target != null) ray.DrawRay(transform, target.transform, Color.red);    //Enemy
+            else if (target != null && targetTag == "PlayerMinion") {
+                if (meleeAttack)
+                    meleeAttack.Attack(damage);
+                else {
+                    ray.DrawRay(transform, target.transform, Color.red);    //Enemy
+                    target.GetComponent<DestroyableObject>().TakeDamage(damage);
+                }
+                
             }
             //Debug.Log(this.gameObject.name + " attack " + target.gameObject.name);
-
-            // Suponiendo que el objetivo tiene un script con un m�todo 'TakeDamage'
-            target.GetComponent<DestroyableObject>().TakeDamage(damage);
 
         }
 

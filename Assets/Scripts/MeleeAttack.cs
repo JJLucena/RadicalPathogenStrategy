@@ -8,16 +8,12 @@ public class MeleeAttack : MonoBehaviour
     public float attackRange = 0.5f; // El rango del ataque
     public LayerMask enemyLayers; // Las capas que pueden ser afectadas por el ataque
 
-    void Update()
+    public void Attack(float damage)
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // Puedes cambiar esto por el input que prefieras
-        {
-            Attack();
-        }
-    }
+        //Hacer animacion
+        //---------------------------------------------
 
-    void Attack()
-    {
+
         // Detectar enemigos en el rango del ataque
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
@@ -25,6 +21,11 @@ public class MeleeAttack : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Golpeado " + enemy.name);
+            DestroyableObject destroyableObject = enemy.GetComponent<DestroyableObject>();
+            if (!destroyableObject)
+                destroyableObject = enemy.GetComponentInParent<DestroyableObject>();
+
+            destroyableObject.TakeDamage(damage);
         }
     }
 
