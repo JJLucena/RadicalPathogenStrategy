@@ -22,6 +22,7 @@ public class Entity : MonoBehaviour {
     private Rigidbody2D rb;
     private bool canAttack = true;
     private Coroutine canAttackCorrutine;
+    private RayDrawer ray;
 
     private enum State {
         GetTarget,
@@ -33,6 +34,7 @@ public class Entity : MonoBehaviour {
         
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        ray = GetComponent<RayDrawer>();
 
         currentState = State.GetTarget;
     }
@@ -123,6 +125,12 @@ public class Entity : MonoBehaviour {
             StartCoroutine(CooldownAttack());
 
             // Animaci�n o efecto de sonido para el ataque
+            if (targetTag == "EnemyMinion") {
+                if (target != null) ray.DrawRay(transform, target.transform, Color.white);  //Player
+            }
+            else if (targetTag == "PlayerMinion") {
+                if (target != null) ray.DrawRay(transform, target.transform, Color.red);    //Enemy
+            }
             //Debug.Log(this.gameObject.name + " attack " + target.gameObject.name);
 
             // Suponiendo que el objetivo tiene un script con un m�todo 'TakeDamage'
@@ -144,6 +152,10 @@ public class Entity : MonoBehaviour {
         rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(cooldownTarget);
         currentState = State.GetTarget;
+    }
+
+    private void OnDestroy() {
+        StopAllCoroutines();
     }
 
 #if UNITY_EDITOR
