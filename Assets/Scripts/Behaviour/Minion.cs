@@ -84,7 +84,7 @@ public class Entity : MonoBehaviour {
             RadiusDetection();
 
             // If no player detected, get the closest target from the list
-            target = EntitiesManager.Instance.GetClosestElement(this.transform, targetTag);
+            target = GameManager.Instance.GetClosestElement(this.transform, targetTag);
         }
 
         if (target != null) {
@@ -122,10 +122,10 @@ public class Entity : MonoBehaviour {
                 StopCoroutine(canAttackCorrutine);
             StartCoroutine(CooldownAttack());
 
-            // Animación o efecto de sonido para el ataque
+            // Animaciï¿½n o efecto de sonido para el ataque
             //Debug.Log(this.gameObject.name + " attack " + target.gameObject.name);
 
-            // Suponiendo que el objetivo tiene un script con un método 'TakeDamage'
+            // Suponiendo que el objetivo tiene un script con un mï¿½todo 'TakeDamage'
             target.GetComponent<DestroyableObject>().TakeDamage(damage);
 
         }
@@ -148,7 +148,7 @@ public class Entity : MonoBehaviour {
 
 #if UNITY_EDITOR
     void OnDrawGizmosSelected() {
-            // Dibujar el radio de visión en el editor
+            // Dibujar el radio de visiï¿½n en el editor
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, visionRadius);
             // Dibujar el rango de ataque en el editor
