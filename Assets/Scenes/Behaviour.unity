@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b5469463934da4cacdafc5c2da400f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 50
   attackCooldownTime: 1
   cooldownAttack: 2
   visionRadius: 3
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b5469463934da4cacdafc5c2da400f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 50
   attackCooldownTime: 1
   cooldownAttack: 2
   visionRadius: 3
@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b5469463934da4cacdafc5c2da400f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 50
   attackCooldownTime: 1
   cooldownAttack: 2
   visionRadius: 3
@@ -1045,6 +1045,6 @@ SceneRoots:
   - {fileID: 965685424}
   - {fileID: 564613861}
   - {fileID: 1359575397}
-  - {fileID: 2104784089}
   - {fileID: 434633211}
   - {fileID: 1170234821}
+  - {fileID: 2104784089}
