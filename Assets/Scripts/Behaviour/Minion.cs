@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Entity : MonoBehaviour {
+    [SerializeField] GameManager gameManager;
 
     [Header("Attack")]
     [SerializeField] float damage = 10f;
@@ -86,7 +87,7 @@ public class Entity : MonoBehaviour {
             RadiusDetection();
 
             // If no player detected, get the closest target from the list
-            target = GameManager.Instance.GetClosestElement(this.transform, targetTag);
+            target = gameManager.GetClosestElement(this.transform, targetTag);
         }
 
         if (target != null) {
