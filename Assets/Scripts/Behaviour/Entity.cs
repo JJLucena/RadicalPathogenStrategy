@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour {
     [SerializeField] float cooldownAttack = 2f;
 
     [Header("Radious & Movement")]
-    [SerializeField] float visionRadius = 5f;
+    [SerializeField] float visionRadius = 3f;
     [SerializeField] float attackRange = 1f;
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float cooldownTarget = 2f;
@@ -57,11 +57,11 @@ public class Entity : MonoBehaviour {
 
     void ContiniousRadiusDetection() {
         if (targetTag == "EnemyMinion") {
-            if (!target.CompareTag("PlayerMinion") || !target.CompareTag("PlayerBase"))
+            if (target != null && target.CompareTag("EnemyBase"))
                 RadiusDetection();
         }
         else if (targetTag == "PlayerMinion") {
-            if (!target.CompareTag("EnemyMinion") || !target.CompareTag("EnemyBase"))
+            if (target != null && target.CompareTag("PlayerBase"))
                 RadiusDetection();
         }
         /*if (target != null && !target.CompareTag(targetTag)) {
@@ -93,6 +93,11 @@ public class Entity : MonoBehaviour {
     }
 
     void Move() {
+        if (target.gameObject == null) {
+            rb.velocity = Vector2.zero; // Stop movement
+            currentState = State.GetTarget;
+            return;
+        }
         float distanceToTarget = Vector2.Distance(transform.position, target.transform.position);
         if (distanceToTarget <= attackRange) {
             rb.velocity = Vector2.zero; // Stop movement
@@ -118,7 +123,8 @@ public class Entity : MonoBehaviour {
             StartCoroutine(CooldownAttack());
 
             // Animación o efecto de sonido para el ataque
-            
+            //Debug.Log(this.gameObject.name + " attack " + target.gameObject.name);
+
             // Suponiendo que el objetivo tiene un script con un método 'TakeDamage'
             target.GetComponent<DestroyableObject>().TakeDamage(damage);
 
