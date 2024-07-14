@@ -804,6 +804,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1095498777516849359, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095498777516849359, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095498777516849359, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095498777516849359, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372396611269587475, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372396611269587475, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372396611269587475, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372396611269587475, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493492546448048446, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493492546448048446, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493492546448048446, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493492546448048446, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7438389107313973901, guid: 2a4fc0fcfc0445146860577e34998dcb, type: 3}
       propertyPath: m_Name
       value: Headbar
