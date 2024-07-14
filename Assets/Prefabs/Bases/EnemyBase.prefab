@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 720312635691127007}
   - component: {fileID: 3121269768380999096}
   - component: {fileID: 4686479260113442392}
+  - component: {fileID: 6775210503965399611}
   m_Layer: 7
   m_Name: EnemyBase
   m_TagString: EnemyBase
@@ -101,3 +102,19 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   typeSelected: 3
+--- !u!114 &6775210503965399611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4314786537630489169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f60a49523b7a6b438e944d8ac821c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 1
+  minionIndex: 0
+  spawnAmount: 3
+  spawnDelay: 10

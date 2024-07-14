@@ -15,14 +15,15 @@ public class GameManager : MonoBehaviour
     public Sprite virusBubblesFloor;
     public Sprite bodyFloor;
 
-    public List<GameObject> floorTiles = new();
+    public List<GameObject> playerFloorTiles = new();
+    public List<GameObject> enemyFloorTiles = new();
 
     // Behaviour
     [Header("Behaviour")]
     public List<GameObject> playerBases = new List<GameObject>();
     public List<GameObject> enemyBases = new List<GameObject>();
-    public List<GameObject> enemyList = new List<GameObject>();
-    public List<GameObject> playerList = new List<GameObject>();
+    public List<GameObject> enemyMinions = new List<GameObject>();
+    public List<GameObject> playerMinions = new List<GameObject>();
     //public List<Transform> zonasLibres = new List<Transform>();
 
     // Difficulty
@@ -36,6 +37,15 @@ public class GameManager : MonoBehaviour
     [Header("Bases")]
     public GameObject[] playerBasePrefabs;
     public GameObject[] enemyBasePrefabs;
+
+    public float baseSpawnRadius;
+
+    [Header("Minions")]
+    public GameObject[] enemyMinionPrefabs;
+    public GameObject[] playerMinionPrefabs;
+
+    // Economy
+    public int coins;
 
     public static GameManager Instance;
 
@@ -61,6 +71,7 @@ public class GameManager : MonoBehaviour
             {
                 for (int j = 0; j < roundSpawns[currentPhase][i]; j++)
                 {
+                    Debug.Log(i);
                     SpawnEnemyBase(i);
                 }
             }
@@ -73,15 +84,44 @@ public class GameManager : MonoBehaviour
         {
             for (int y = 0; y < mapSideLenght; y++)
             {
-                floorTiles.Add(Instantiate(floor, new Vector3(x, y, 0), Quaternion.identity));
+                playerFloorTiles.Add(Instantiate(floor, new Vector3(x, y, 0), Quaternion.identity));
             }
         }
     }
 
     private void SpawnEnemyBase(int baseIndex) {
-        Instantiate(enemyBasePrefabs[baseIndex], new Vector3(Random.Range(0, mapSideLenght) + 0.5f, Random.Range(0, mapSideLenght) + 0.5f, 0f), Quaternion.identity);
+        AddEnemyBase(Instantiate(enemyBasePrefabs[baseIndex], new Vector3(Random.Range(0, mapSideLenght) + 0.5f, Random.Range(0, mapSideLenght) + 0.5f, 0f), Quaternion.identity));
+    }
+    public bool SpawnPlayerBase(int cost, int baseIndex, Vector3 coordinates) {
+        if (cost <= coins){
+        AddPlayerBase(Instantiate(playerBasePrefabs[baseIndex], coordinates, Quaternion.identity));
+        coins -= cost;
+        return true;
+        }
+        return false;
     }
 
+    public void SpawnMinions(bool isEnemy, int minionAmount, int minionIndex, Vector3 coordinates) {
+        
+        for (int i = 0; i < minionAmount; i++)
+        {
+
+
+            // Se genera un ángulo aleatorio en radianes
+            float angleRad = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+            Vector2 spawnOffset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * Random.Range(3, baseSpawnRadius);
+            Vector2 spawnPosition = (Vector2)coordinates + spawnOffset;
+
+            // Se instancia la celda en la posición calculada
+            if (spawnPosition.x > 0
+            && spawnPosition.y > 0
+            && spawnPosition.x < mapSideLenght
+            && spawnPosition.y < mapSideLenght)
+                AddEnemyMinion(Instantiate((isEnemy ? enemyMinionPrefabs : playerMinionPrefabs)[minionIndex], spawnPosition, Quaternion.identity));
+        }
+    }
+
+    // List BASE functions
     public void AddPlayerBase(GameObject basePlayer) {
         playerBases.Add(basePlayer);
     }
@@ -96,20 +136,23 @@ public class GameManager : MonoBehaviour
         enemyBases.Remove(enemyBase);
     }
 
-    public void AddEnemy(GameObject Enemy) {
-        enemyList.Add(Enemy);
+    public void AddEnemyMinion(GameObject Enemy) {
+        enemyMinions.Add(Enemy);
     }
-    public void RemoveEnemy(GameObject Enemy) {
-        enemyList.Remove(Enemy);
-    }
-
-    public void AddPlayer(GameObject player) {
-        playerList.Add(player);
-    }
-    public void RemovePlayer(GameObject player) {
-        playerList.Remove(player);
+    public void RemoveEnemyMinion(GameObject Enemy) {
+        enemyMinions.Remove(Enemy);
     }
 
+    public void AddPlayerMinion(GameObject player) {
+        playerMinions.Add(player);
+    }
+    public void RemovePlayerMinion(GameObject player) {
+        playerMinions.Remove(player);
+    }
+
+    public void AddCoins(int amount) {
+        coins += amount;
+    }
     /*public void AddZonaLibre(Transform zonaLibre) {
         zonasLibres.Add(zonaLibre);
     }
@@ -118,33 +161,58 @@ public class GameManager : MonoBehaviour
     }*/
 
     public GameObject GetClosestElement(Transform reference, string targetTag) {
-        List<GameObject>[] enemyLists = { enemyBases/*, enemyList, zonasLibres*/ };
-        List<GameObject>[] playerLists = { playerBases/*, playerList, zonasLibres*/ };
-
-        if (targetTag == "EnemyMinion") {
-            return LookingIntoLists(reference, enemyLists);
-        } else if (targetTag == "PlayerMinion") {
-            return LookingIntoLists(reference, playerLists);
-        } else {
-            Debug.LogError("TAG no existente");
-            return null;
+        switch (targetTag)
+        {
+            case "EnemyMinion":
+                if (enemyMinions.Count < 1){
+                    return null;
+                }
+                return LookingIntoLists(reference, enemyMinions);
+            case "PlayerMinion":
+                if (playerMinions.Count < 1){
+                    return null;
+                }
+                return LookingIntoLists(reference, playerMinions);
+            case "EnemyBase":
+                if (enemyBases.Count < 1){
+                    return null;
+                }
+                return LookingIntoLists(reference, enemyBases);
+            case "PlayerBase":
+                if (playerBases.Count < 1){
+                    return null;
+                }
+                return LookingIntoLists(reference, playerBases);
+            case "EnemyFloor":
+                if (enemyFloorTiles.Count < 1){
+                    return null;
+                }
+                return LookingIntoLists(reference, enemyFloorTiles);
+            case "PlayerFloor":
+                if (playerFloorTiles.Count < 1){
+                    return null;
+                }
+                return LookingIntoLists(reference, playerFloorTiles);
+            default:
+                Debug.LogError("TAG no existente");
+                return null;
         }
     }
 
-    private GameObject LookingIntoLists(Transform reference, List<GameObject>[] currentList) {
+    private GameObject LookingIntoLists(Transform reference, List<GameObject> possibleTargets) {
         GameObject closest = null;
         float closestDistance = Mathf.Infinity;
 
         // Busca el elemento m�s cercano en las listas que corresponden seg�n si es player o enemy
-        foreach (var list in currentList) {
-            foreach (var element in list) {
-                float distance = Vector3.Distance(reference.position, element.transform.position);
-                if (distance < closestDistance) {
-                    closestDistance = distance;
-                    closest = element.gameObject;
-                }
+
+        foreach (var element in possibleTargets) {
+            float distance = Vector3.Distance(reference.position, element.transform.position);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closest = element.gameObject;
             }
         }
+
         return closest;
     }
 }
