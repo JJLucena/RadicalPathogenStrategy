@@ -11,6 +11,14 @@ public class Entity : MonoBehaviour {
     [SerializeField] float attackCooldownTime = 1f;
     [SerializeField] float cooldownAttack = 2f;
 
+    [Header("SFX Attack")]
+    [SerializeField] Sfx sfxSelected;
+    public enum Sfx {
+        Laser,
+        Pop,
+        Slash
+    }
+
     [Header("Radious & Movement")]
     [SerializeField] float visionRadius = 3f;
     [SerializeField] float attackRange = 1f;
@@ -157,7 +165,7 @@ public class Entity : MonoBehaviour {
                 
             }
             //Debug.Log(this.gameObject.name + " attack " + target.gameObject.name);
-
+            AudioManager.instance.PlaySFX(sfxSelected.ToString());
         }
 
         // Verifica si el objetivo sigue estando en el rango de ataque

@@ -48,7 +48,9 @@ public class GameManager : MonoBehaviour
     // Economy
     [Header("Economy")]
     private int coins;
+
     public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI timerText;
 
     public static GameManager Instance;
 
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        timerText.text = GetTransformTextTimer();
         currentPhase = (int)timer / phaseLenght;
 
         if (lastRunPhase < currentPhase)
@@ -257,5 +260,15 @@ public class GameManager : MonoBehaviour
         }
 
         return closest;
+    }
+
+    public string GetTransformTextTimer() {
+        int minutos = Mathf.FloorToInt(timer / 60f);
+        int segundos = Mathf.FloorToInt(timer % 60f);
+        int milisegundos = Mathf.FloorToInt((timer * 1000) % 1000) / 100; // Dividir por 100 para reducir el nº de digitos;
+
+        // Formatear el tiempo en el formato MM:SS:MS
+        string tiempoFormateado = string.Format("{0:0}:{1:00}:{2:0}", minutos, segundos, milisegundos);
+        return tiempoFormateado;
     }
 }

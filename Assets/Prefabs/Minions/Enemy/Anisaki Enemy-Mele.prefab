@@ -191,6 +191,7 @@ MonoBehaviour:
   damage: 10
   attackCooldownTime: 1
   cooldownAttack: 2
+  sfxSelected: 2
   visionRadius: 3
   attackRange: 1
   moveSpeed: 2

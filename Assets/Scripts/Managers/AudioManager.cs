@@ -72,11 +72,7 @@ public class AudioManager : MonoBehaviour
     private void LoadMusicClips()
     {
         // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCI�N DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/Music
-        /*
-        musicClips["MainTheme"] = Resources.Load<AudioClip>("Music/menu");
-        musicClips["GameTheme"] = Resources.Load<AudioClip>("Music/gameplay");
-        ...
-        */
+        musicClips["MainTheme"] = Resources.Load<AudioClip>("Music/Background");
     }
 
     // M�todo de la clase singleton para reproducir efectos de sonido

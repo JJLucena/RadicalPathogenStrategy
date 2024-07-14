@@ -62,4 +62,8 @@ public class DestroyableObject : MonoBehaviour {
             SetDestroyed();
         }
     }
+
+    private void OnDestroy() {
+        RemoveCurrentElementToList();
+    }
 }
