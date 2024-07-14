@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2145786720363707564}
   - component: {fileID: 109196290132799847}
   - component: {fileID: 2534029199921661172}
+  - component: {fileID: 1419545967813616139}
   m_Layer: 7
   m_Name: GripeB Enemy-Shoot
   m_TagString: EnemyMinion
@@ -330,3 +331,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayDuration: 0.2
   laserSpeed: 0.0001
+--- !u!114 &1419545967813616139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819451686907294517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95bd97e4467e8946938586de7be4608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
