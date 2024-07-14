@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu transition/GameOver.unity
     guid: 893b5c72ddee7d340af5ec44971ccfe1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu transition/WinScene.unity
     guid: f93042499b750d542b1a38e0918e3f43
   - enabled: 1
