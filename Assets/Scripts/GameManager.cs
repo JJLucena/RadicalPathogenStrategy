@@ -130,14 +130,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void AddCoins(int amount)
+    public void AddCoins(int amount)
     {
         coins = int.Parse(coinsText.text);
         coins += amount;
         coinsText.text = coins.ToString();
     }
 
-    private void RemoveCoins(int amount)
+    public void RemoveCoins(int amount)
     {
         coins = int.Parse(coinsText.text);
         coins -= amount;
