@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1be4d610fa9d5b74a9ba9a9bf2daf403
-      internalID: -2020191649
+      spriteID: 046ef5e1be7f7f04b97d00c4317b29f8
+      internalID: -1160822729
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfc4cedbcc399814e81521637962bcd7
-      internalID: 1230306977
+      spriteID: 02edcd51d315ba44092f693308fb357a
+      internalID: -1118478379
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 672f8e97a95fb56418a5fcdd9725d1c5
-      internalID: -1060268184
+      spriteID: 7faba5b43bc953b449ffe2854cad4814
+      internalID: -550823016
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf3e1744cfea2634caf55abd18d2267a
-      internalID: -296098131
+      spriteID: 6018b63be94f7c8428733835025add0b
+      internalID: -2144464950
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Celula TA  AN ATK Plataformas 32 X 32_0: -2020191649
-      Celula TA  AN ATK Plataformas 32 X 32_1: 1230306977
-      Celula TA  AN ATK Plataformas 32 X 32_2: -1060268184
-      Celula TA  AN ATK Plataformas 32 X 32_3: -296098131
+      Celula TA  AN ATK Plataformas 32 X 32_0: -1160822729
+      Celula TA  AN ATK Plataformas 32 X 32_1: -1118478379
+      Celula TA  AN ATK Plataformas 32 X 32_2: -550823016
+      Celula TA  AN ATK Plataformas 32 X 32_3: -2144464950
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
