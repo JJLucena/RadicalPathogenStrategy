@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 5955989712978110137}
   - component: {fileID: 1740804695695452084}
   - component: {fileID: 3161787760433763292}
+  - component: {fileID: -4513706214787694062}
   m_Layer: 6
   m_Name: Eosinofilos PLayer-Mele
   m_TagString: PlayerMinion
@@ -427,6 +428,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayDuration: 0.2
   laserSpeed: 0.0001
+--- !u!114 &-4513706214787694062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211085224819057892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95bd97e4467e8946938586de7be4608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8626079325618703470
 GameObject:
   m_ObjectHideFlags: 0
