@@ -52,7 +52,7 @@ public class DestroyableObject : MonoBehaviour {
             onEnemyFXDestroy(transform.position);
         */
         RemoveCurrentElementToList();
-        gameManager.AddCoins(gameManager);  //Reward
+        //gameManager.AddCoins(gameManager);  //Reward
         Destroy(gameObject);
     }
 
