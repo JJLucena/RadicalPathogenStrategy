@@ -3,32 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // ---------------------------------------------------------------------------------
-// SCRIPT PARA LA GESTIÓN DE AUDIO (vinculado a un GameObject vacío "AudioManager")
+// SCRIPT PARA LA GESTIï¿½N DE AUDIO (vinculado a un GameObject vacï¿½o "AudioManager")
 // ---------------------------------------------------------------------------------
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
 
     private float sfxvolume = 1;
 
-    // Instancia única del AudioManager (porque es una clase Singleton) STATIC
+    // Instancia ï¿½nica del AudioManager (porque es una clase Singleton) STATIC
     public static AudioManager instance;
 
     // Se crean dos AudioSources diferentes para que se puedan
-    // reproducir los efectos y la música de fondo al mismo tiempo
+    // reproducir los efectos y la mï¿½sica de fondo al mismo tiempo
     //public AudioSource sfxSource; // Componente AudioSource para efectos de sonido
-    public AudioSource musicSource; // Componente AudioSource para la música de fondo
+    public AudioSource musicSource; // Componente AudioSource para la mï¿½sica de fondo
 
-    // En vez de usar un vector de AudioClips (que podría ser) vamos a utilizar un Diccionario
-    // en el que cargaremos directamente los recursos desde la jerarquía del proyecto
+    // En vez de usar un vector de AudioClips (que podrï¿½a ser) vamos a utilizar un Diccionario
+    // en el que cargaremos directamente los recursos desde la jerarquï¿½a del proyecto
     // Cada entrada del diccionario tiene una string como clave y un AudioClip como valor
     public Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> musicClips = new Dictionary<string, AudioClip>();
 
-    // Método Awake que se llama al inicio antes de que se active el objeto. útil para inicializar
-    // variables u objetos que serán llamados por otros scripts (game managers, clases singleton, etc).
-    private void Awake() {
+    // Mï¿½todo Awake que se llama al inicio antes de que se active el objeto. ï¿½til para inicializar
+    // variables u objetos que serï¿½n llamados por otros scripts (game managers, clases singleton, etc).
+    private void Awake()
+    {
 
         // ----------------------------------------------------------------
-        // AQUÍ ES DONDE SE DEFINE EL COMPORTAMIENTO DE LA CLASE SINGLETON
+        // AQUï¿½ ES DONDE SE DEFINE EL COMPORTAMIENTO DE LA CLASE SINGLETON
         // Garantizamos que solo exista una instancia del AudioManager
         // Si no hay instancias previas se asigna la actual
         // Si hay instancias se destruye la nueva
@@ -45,30 +47,31 @@ public class AudioManager : MonoBehaviour {
 
     }
 
-    private void Start() {
+    private void Start()
+    {
         /*
         float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.72f);
         AudioManager.instance.ChangeMusicVolume(savedVolume);
         float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.72f);
         AudioManager.instance.ChangeSFXVolume(savedSFX);
         */
-        PlayMusic("MainTheme");  // Reproduce la música principal
+        PlayMusic("MainTheme");  // Reproduce la mï¿½sica principal
     }
 
-    // Método privado para cargar los efectos de sonido directamente desde las carpetas
-    private void LoadSFXClips() {
-        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIÓN DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/SFX
-        /*
-        sfxClips["Explosion"] = Resources.Load<AudioClip>("SFX/explosion");
-        sfxClips["Cut"] = Resources.Load<AudioClip>("SFX/cut");
-        sfxClips["Button"] = Resources.Load<AudioClip>("SFX/button");
-        ...
-        */
+    // Mï¿½todo privado para cargar los efectos de sonido directamente desde las carpetas
+    private void LoadSFXClips()
+    {
+        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIï¿½N DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/SFX
+        sfxClips["ClickUI"] = Resources.Load<AudioClip>("SFX/clickui");
+        sfxClips["Laser"] = Resources.Load<AudioClip>("SFX/laser");
+        sfxClips["Pop"] = Resources.Load<AudioClip>("SFX/pop");
+        sfxClips["Slash"] = Resources.Load<AudioClip>("SFX/slash");
     }
 
-    // Método privado para cargar la música de fondo directamente desde las carpetas
-    private void LoadMusicClips() {
-        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIÓN DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/Music
+    // Mï¿½todo privado para cargar la mï¿½sica de fondo directamente desde las carpetas
+    private void LoadMusicClips()
+    {
+        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIï¿½N DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/Music
         /*
         musicClips["MainTheme"] = Resources.Load<AudioClip>("Music/menu");
         musicClips["GameTheme"] = Resources.Load<AudioClip>("Music/gameplay");
@@ -76,18 +79,22 @@ public class AudioManager : MonoBehaviour {
         */
     }
 
-    // Método de la clase singleton para reproducir efectos de sonido
-    public void PlaySFX(string clipName) {
-        if (sfxClips.ContainsKey(clipName)) {
+    // Mï¿½todo de la clase singleton para reproducir efectos de sonido
+    public void PlaySFX(string clipName)
+    {
+        if (sfxClips.ContainsKey(clipName))
+        {
             // Metodo que crea un un nuevo audioSource, reproduce el sonido, espera a que termine y lo borra
             PlaySoundAndDestroy(sfxClips, clipName, false);
         }
-        else Debug.LogWarning("El AudioClip " + clipName + " no se encontró en el diccionario de sfxClips.");
+        else Debug.LogWarning("El AudioClip " + clipName + " no se encontrï¿½ en el diccionario de sfxClips.");
     }
 
-    // Método de la clase singleton para reproducir música de fondo
-    public void PlayMusic(string clipName) {
-        if (musicClips.ContainsKey(clipName)) {
+    // Mï¿½todo de la clase singleton para reproducir mï¿½sica de fondo
+    public void PlayMusic(string clipName)
+    {
+        if (musicClips.ContainsKey(clipName))
+        {
             musicSource.clip = musicClips[clipName];
             musicSource.Play();
 
@@ -95,11 +102,12 @@ public class AudioManager : MonoBehaviour {
             //PlaySoundAndDestroy(musicClips, clipName, true);
             #endregion
         }
-        else Debug.LogWarning("El AudioClip " + clipName + " no se encontró en el diccionario de musicClips.");
+        else Debug.LogWarning("El AudioClip " + clipName + " no se encontrï¿½ en el diccionario de musicClips.");
     }
 
     #region Create new AudioSource, Play Sound, Wait and Destroy
-    private void PlaySoundAndDestroy(Dictionary<string, AudioClip> dictionaryClips, string clipName, bool loop) {
+    private void PlaySoundAndDestroy(Dictionary<string, AudioClip> dictionaryClips, string clipName, bool loop)
+    {
         //Debug.Log(clipName + ", " + loop);
         // Crear un nuevo AudioSource
         AudioSource newAudioSource = gameObject.AddComponent<AudioSource>();
@@ -111,20 +119,23 @@ public class AudioManager : MonoBehaviour {
         // Reproducir el sonido
         newAudioSource.Play();
 
-        if (loop) {
+        if (loop)
+        {
             newAudioSource.loop = true;
         }
-        else {
+        else
+        {
             //Corrutina que espere el tiempo del clip y lo borre
             float timeSound = newAudioSource.clip.length;
 
-            // Autodestruir el AudioSource después de que termine de reproducir el sonido
+            // Autodestruir el AudioSource despuï¿½s de que termine de reproducir el sonido
             Destroy(newAudioSource, timeSound);
         }
     }
     #endregion
 
-    public float GetSFXDuration(string clipName) {
+    public float GetSFXDuration(string clipName)
+    {
         return sfxClips[clipName].length;
     }
     public void ChangeMusicVolume(float value)
