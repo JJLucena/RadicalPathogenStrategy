@@ -179,6 +179,7 @@ MonoBehaviour:
   damage: 10
   attackCooldownTime: 1
   cooldownAttack: 2
+  sfxSelected: 2
   visionRadius: 3
   attackRange: 1
   moveSpeed: 2
@@ -200,6 +201,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   typeSelected: 0
+  reward: 10
 --- !u!114 &3651514192141635082
 MonoBehaviour:
   m_ObjectHideFlags: 0
