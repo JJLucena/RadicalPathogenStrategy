@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d767266f13beea340b245abcd02242ee
+guid: 639d6c192d6199143b6c512a6a98a449
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,30 +93,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: habilidad_adioterapia_on_32X32_0
+      name: interfaz1_borde_derecho 32X32_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 0
-        width: 23
-        height: 32
+        x: 23
+        y: 1
+        width: 7
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06e152f642719eb4daa735641414b992
-      internalID: 537986372
+      spriteID: a2928b2479207554fad2af1bc0ee6ede
+      internalID: 1135216010
       vertices: []
       indices: 
       edges: []
@@ -134,14 +121,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      habilidad_adioterapia_on_32X32_0: 537986372
+      interfaz1_borde_derecho 32X32_0: 1135216010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
