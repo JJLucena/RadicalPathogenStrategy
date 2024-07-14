@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +25,18 @@ public class GameManager : MonoBehaviour
     public List<GameObject> playerList = new List<GameObject>();
     //public List<Transform> zonasLibres = new List<Transform>();
 
+    // Difficulty
+    [Header("Timer")]
+    public float timer = 0;
+    public int phaseLenght;
+    public int currentPhase;
+    public int lastRunPhase = -1;
+    List<int[]> roundSpawns = new();
+
+    [Header("Bases")]
+    public GameObject[] playerBasePrefabs;
+    public GameObject[] enemyBasePrefabs;
+
     public static GameManager Instance;
 
     // Start is called before the first frame update
@@ -31,19 +44,30 @@ public class GameManager : MonoBehaviour
     {
         GenerateMap();
 
-        // Busca y llena las listas con los objetos de la escena usando tags
-        FillListWithTag(playerBases, "PlayerBase");
-        FillListWithTag(enemyBases, "EnemyBase");
-        FillListWithTag(enemyList, "EnemyMinion");
-        FillListWithTag(playerList, "PlayerMinion");
+        // Define rounds
+        roundSpawns.Add(new int[]{3, 0, 0, 0});
+        roundSpawns.Add(new int[]{3, 0, 0, 0});
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        currentPhase = (int)timer / phaseLenght;
+
+        if (lastRunPhase < currentPhase)
+        {
+            for (int i = 0; i < roundSpawns[currentPhase].Length - 1; i++)
+            {
+                for (int j = 0; j < roundSpawns[currentPhase][i]; j++)
+                {
+                    SpawnEnemyBase(i);
+                }
+            }
+            lastRunPhase = currentPhase;
+        }
     }
-    
+
     private void GenerateMap() {
         for (int x = 0; x < mapSideLenght; x++)
         {
@@ -54,18 +78,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void FillListWithTag(List<GameObject> list, string tag) {
-        list.Clear();
-        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag(tag);
-        foreach (GameObject obj in objectsWithTag) {
-            list.Add(obj);
-        }
+    private void SpawnEnemyBase(int baseIndex) {
+        Instantiate(enemyBasePrefabs[baseIndex], new Vector3(Random.Range(0, mapSideLenght) + 0.5f, Random.Range(0, mapSideLenght) + 0.5f, 0f), Quaternion.identity);
     }
 
     public void AddPlayerBase(GameObject basePlayer) {
         playerBases.Add(basePlayer);
     }
-
     public void RemovePlayerBase(GameObject basePlayer) {
         playerBases.Remove(basePlayer);
     }
@@ -73,7 +92,6 @@ public class GameManager : MonoBehaviour
     public void AddEnemyBase(GameObject enemyBase) {
         enemyBases.Add(enemyBase);
     }
-
     public void RemoveEnemyBase(GameObject enemyBase) {
         enemyBases.Remove(enemyBase);
     }
