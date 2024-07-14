@@ -25,6 +25,7 @@ public class Entity : MonoBehaviour {
     private Coroutine canAttackCorrutine;
     private RayDrawer ray;
     private MeleeAttack meleeAttack;
+    private Animator animator;
 
     private enum State {
         GetTarget,
@@ -41,7 +42,8 @@ public class Entity : MonoBehaviour {
 
         currentState = State.GetTarget;
 
-        if(!gameManager)
+        animator = GetComponent<Animator>();
+        if (!gameManager)
             gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -101,6 +103,8 @@ public class Entity : MonoBehaviour {
     }
 
     void Move() {
+        animator.SetBool("Attack", false);
+        animator.SetBool("Walk", true);
         if (target.gameObject == null) {
             rb.velocity = Vector2.zero; // Stop movement
             currentState = State.GetTarget;
@@ -131,6 +135,9 @@ public class Entity : MonoBehaviour {
             StartCoroutine(CooldownAttack());
 
             // Animaci�n o efecto de sonido para el ataque
+            animator.SetBool("Walk", false);
+            animator.SetBool("Attack", true);
+
             if (target != null && targetTag == "EnemyMinion") {
                 if (meleeAttack)
                     meleeAttack.Attack(damage);
