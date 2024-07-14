@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8642262107856477511}
   - component: {fileID: 2555680300094817259}
   - component: {fileID: 3648483127039678372}
+  - component: {fileID: 20764253777914226}
   m_Layer: 6
   m_Name: PlayerBase
   m_TagString: PlayerBase
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.2311499, g: 0.8113208, b: 0.2867872, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 410e67c0b73b4fe418653834b8ba3b6a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,3 +102,20 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   typeSelected: 2
+  reward: 10
+--- !u!114 &20764253777914226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6975555048717222365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f60a49523b7a6b438e944d8ac821c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 0
+  minionIndex: 0
+  spawnAmount: 0
+  spawnDelay: 0

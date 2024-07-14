@@ -167,4 +167,4 @@ MonoBehaviour:
   - {fileID: 5283587787325649004, guid: f8193010cc3ab5f46b4f7d264f2aeb41, type: 3}
   playerMinionPrefabs:
   - {fileID: 0}
-  coins: 0
+  coinsText: {fileID: 0}

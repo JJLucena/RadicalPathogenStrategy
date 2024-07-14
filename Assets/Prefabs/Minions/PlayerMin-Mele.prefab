@@ -80,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.2311499, g: 0.8113208, b: 0.2867872, a: 1}
+  m_Sprite: {fileID: -227338503, guid: 72440068a10d7fb4baa422a3d360662d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   typeSelected: 0
+  reward: 10
 --- !u!114 &3651514192141635082
 MonoBehaviour:
   m_ObjectHideFlags: 0
