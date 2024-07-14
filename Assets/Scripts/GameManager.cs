@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,7 +46,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerMinionPrefabs;
 
     // Economy
-    public int coins;
+    [Header("Economy")]
+    private int coins;
+    public TextMeshProUGUI coinsText;
 
     public static GameManager Instance;
 
@@ -55,8 +58,11 @@ public class GameManager : MonoBehaviour
         GenerateMap();
 
         // Define rounds
-        roundSpawns.Add(new int[]{3, 0, 0, 0});
-        roundSpawns.Add(new int[]{3, 0, 0, 0});
+        roundSpawns.Add(new int[] { 3, 0, 0, 0 });
+        roundSpawns.Add(new int[] { 3, 0, 0, 0 });
+
+        // Render coins text
+        coinsText = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -78,7 +84,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void GenerateMap() {
+    private void GenerateMap()
+    {
         for (int x = 0; x < mapSideLenght; x++)
         {
             for (int y = 0; y < mapSideLenght; y++)
@@ -88,20 +95,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SpawnEnemyBase(int baseIndex) {
+    private void SpawnEnemyBase(int baseIndex)
+    {
         AddEnemyBase(Instantiate(enemyBasePrefabs[baseIndex], new Vector3(Random.Range(0, mapSideLenght) + 0.5f, Random.Range(0, mapSideLenght) + 0.5f, 0f), Quaternion.identity));
     }
-    public bool SpawnPlayerBase(int cost, int baseIndex, Vector3 coordinates) {
-        if (cost <= coins){
-        AddPlayerBase(Instantiate(playerBasePrefabs[baseIndex], coordinates, Quaternion.identity));
-        coins -= cost;
-        return true;
+    public bool SpawnPlayerBase(int cost, int baseIndex, Vector3 coordinates)
+    {
+
+        if (cost <= int.Parse(coinsText.text))
+        {
+            AddPlayerBase(Instantiate(playerBasePrefabs[baseIndex], coordinates, Quaternion.identity));
+            RemoveCoins(cost);
+            return true;
         }
         return false;
     }
 
-    public void SpawnMinions(bool isEnemy, int minionAmount, int minionIndex, Vector3 coordinates) {
-        
+    public void SpawnMinions(bool isEnemy, int minionAmount, int minionIndex, Vector3 coordinates)
+    {
+
         for (int i = 0; i < minionAmount; i++)
         {
             // Se genera un ángulo aleatorio en radianes
@@ -118,38 +130,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void AddCoins(int amount)
+    {
+        coins = int.Parse(coinsText.text);
+        coins += amount;
+        coinsText.text = coins.ToString();
+    }
+
+    private void RemoveCoins(int amount)
+    {
+        coins = int.Parse(coinsText.text);
+        coins -= amount;
+        coinsText.text = coins.ToString();
+    }
+
     // List BASE functions
-    public void AddPlayerBase(GameObject basePlayer) {
+    public void AddPlayerBase(GameObject basePlayer)
+    {
         playerBases.Add(basePlayer);
     }
-    public void RemovePlayerBase(GameObject basePlayer) {
+    public void RemovePlayerBase(GameObject basePlayer)
+    {
         playerBases.Remove(basePlayer);
     }
 
-    public void AddEnemyBase(GameObject enemyBase) {
+    public void AddEnemyBase(GameObject enemyBase)
+    {
         enemyBases.Add(enemyBase);
     }
-    public void RemoveEnemyBase(GameObject enemyBase) {
+    public void RemoveEnemyBase(GameObject enemyBase)
+    {
         enemyBases.Remove(enemyBase);
     }
 
-    public void AddEnemyMinion(GameObject Enemy) {
+    public void AddEnemyMinion(GameObject Enemy)
+    {
         enemyMinions.Add(Enemy);
     }
-    public void RemoveEnemyMinion(GameObject Enemy) {
+    public void RemoveEnemyMinion(GameObject Enemy)
+    {
         enemyMinions.Remove(Enemy);
+        AddCoins(10);
     }
 
-    public void AddPlayerMinion(GameObject player) {
+    public void AddPlayerMinion(GameObject player)
+    {
         playerMinions.Add(player);
     }
-    public void RemovePlayerMinion(GameObject player) {
+    public void RemovePlayerMinion(GameObject player)
+    {
         playerMinions.Remove(player);
     }
 
-    public void AddCoins(int amount) {
-        coins += amount;
-    }
+    // public void AddCoins(int amount)
+    // {
+    //     coins += amount;
+    // }
     /*public void AddZonaLibre(Transform zonaLibre) {
         zonasLibres.Add(zonaLibre);
     }
@@ -157,36 +193,43 @@ public class GameManager : MonoBehaviour
         zonasLibres.Remove(zonaLibre);
     }*/
 
-    public GameObject GetClosestElement(Vector3 reference, string targetTag) {
+    public GameObject GetClosestElement(Vector3 reference, string targetTag)
+    {
         switch (targetTag)
         {
             case "EnemyMinion":
-                if (enemyMinions.Count < 1){
+                if (enemyMinions.Count < 1)
+                {
                     return null;
                 }
                 return LookingIntoLists(reference, enemyMinions);
             case "PlayerMinion":
-                if (playerMinions.Count < 1){
+                if (playerMinions.Count < 1)
+                {
                     return null;
                 }
                 return LookingIntoLists(reference, playerMinions);
             case "EnemyBase":
-                if (enemyBases.Count < 1){
+                if (enemyBases.Count < 1)
+                {
                     return null;
                 }
                 return LookingIntoLists(reference, enemyBases);
             case "PlayerBase":
-                if (playerBases.Count < 1){
+                if (playerBases.Count < 1)
+                {
                     return null;
                 }
                 return LookingIntoLists(reference, playerBases);
             case "EnemyFloor":
-                if (enemyFloorTiles.Count < 1){
+                if (enemyFloorTiles.Count < 1)
+                {
                     return null;
                 }
                 return LookingIntoLists(reference, enemyFloorTiles);
             case "PlayerFloor":
-                if (playerFloorTiles.Count < 1){
+                if (playerFloorTiles.Count < 1)
+                {
                     return null;
                 }
                 return LookingIntoLists(reference, playerFloorTiles);
@@ -196,15 +239,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private GameObject LookingIntoLists(Vector3 reference, List<GameObject> possibleTargets) {
+    private GameObject LookingIntoLists(Vector3 reference, List<GameObject> possibleTargets)
+    {
         GameObject closest = null;
         float closestDistance = Mathf.Infinity;
 
         // Busca el elemento m�s cercano en las listas que corresponden seg�n si es player o enemy
 
-        foreach (var element in possibleTargets) {
+        foreach (var element in possibleTargets)
+        {
             float distance = Vector3.Distance(reference, element.transform.position);
-            if (distance < closestDistance) {
+            if (distance < closestDistance)
+            {
                 closestDistance = distance;
                 closest = element.gameObject;
             }
