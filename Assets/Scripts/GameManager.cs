@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour
             {
                 for (int j = 0; j < roundSpawns[currentPhase][i]; j++)
                 {
-                    Debug.Log(i);
                     SpawnEnemyBase(i);
                 }
             }
@@ -105,8 +104,6 @@ public class GameManager : MonoBehaviour
         
         for (int i = 0; i < minionAmount; i++)
         {
-
-
             // Se genera un ángulo aleatorio en radianes
             float angleRad = Random.Range(0f, 360f) * Mathf.Deg2Rad;
             Vector2 spawnOffset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * Random.Range(3, baseSpawnRadius);
@@ -160,7 +157,7 @@ public class GameManager : MonoBehaviour
         zonasLibres.Remove(zonaLibre);
     }*/
 
-    public GameObject GetClosestElement(Transform reference, string targetTag) {
+    public GameObject GetClosestElement(Vector3 reference, string targetTag) {
         switch (targetTag)
         {
             case "EnemyMinion":
@@ -199,14 +196,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private GameObject LookingIntoLists(Transform reference, List<GameObject> possibleTargets) {
+    private GameObject LookingIntoLists(Vector3 reference, List<GameObject> possibleTargets) {
         GameObject closest = null;
         float closestDistance = Mathf.Infinity;
 
         // Busca el elemento m�s cercano en las listas que corresponden seg�n si es player o enemy
 
         foreach (var element in possibleTargets) {
-            float distance = Vector3.Distance(reference.position, element.transform.position);
+            float distance = Vector3.Distance(reference, element.transform.position);
             if (distance < closestDistance) {
                 closestDistance = distance;
                 closest = element.gameObject;

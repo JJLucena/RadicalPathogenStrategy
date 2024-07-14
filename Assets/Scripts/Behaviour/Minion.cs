@@ -92,7 +92,7 @@ public class Entity : MonoBehaviour {
             RadiusDetection();
 
             // If no player detected, get the closest target from the list
-            target = gameManager.GetClosestElement(this.transform, targetTag);
+            target = gameManager.GetClosestElement(this.transform.position, targetTag);
         }
 
         if (target != null) {
