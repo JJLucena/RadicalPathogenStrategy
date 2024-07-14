@@ -10,6 +10,9 @@ public class DestroyableObject : MonoBehaviour {
     [SerializeField] float health;
     [SerializeField] Type typeSelected;
 
+    [Header("Health")]
+    [SerializeField] int reward = 10;
+
     public enum Type {
         PlayerMinion,
         EnemyMinion,
@@ -49,6 +52,7 @@ public class DestroyableObject : MonoBehaviour {
             onEnemyFXDestroy(transform.position);
         */
         RemoveCurrentElementToList();
+        gameManager.AddCoins(gameManager);  //Reward
         Destroy(gameObject);
     }
 
