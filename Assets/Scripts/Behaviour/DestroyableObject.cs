@@ -10,7 +10,7 @@ public class DestroyableObject : MonoBehaviour {
     [SerializeField] float health;
     [SerializeField] Type typeSelected;
 
-    [Header("Health")]
+    [Header("Economy")]
     [SerializeField] int reward = 10;
 
     public enum Type {
@@ -30,16 +30,16 @@ public class DestroyableObject : MonoBehaviour {
     void RemoveCurrentElementToList() {
         switch (typeSelected) {
             case Type.PlayerMinion:
-                gameManager.RemovePlayerMinion(this.gameObject);
+                gameManager.RemovePlayerMinion(gameObject);
                 break;
             case Type.EnemyMinion:
-                gameManager.RemoveEnemyMinion(this.gameObject);
+                gameManager.RemoveEnemyMinion(gameObject);
                 break;
             case Type.PlayerBase:
-                gameManager.RemovePlayerBase(this.gameObject);
+                gameManager.RemovePlayerBase(gameObject);
                 break;
             case Type.EnemyBase:
-                gameManager.RemoveEnemyBase(this.gameObject);
+                gameManager.RemoveEnemyBase(gameObject);
                 break;
         }
     }
@@ -52,7 +52,7 @@ public class DestroyableObject : MonoBehaviour {
             onEnemyFXDestroy(transform.position);
         */
         RemoveCurrentElementToList();
-        //gameManager.AddCoins(gameManager);  //Reward
+        gameManager.AddCoins(reward);  //Reward
         Destroy(gameObject);
     }
 

@@ -69,7 +69,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  baseSpawnRadius: 0
+  baseSpawnRadius: 4
   enemyMinionPrefabs:
   - {fileID: 5283587787325649004, guid: f8193010cc3ab5f46b4f7d264f2aeb41, type: 3}
   playerMinionPrefabs:
