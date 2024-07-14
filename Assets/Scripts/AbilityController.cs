@@ -10,13 +10,18 @@ public class AbilityButton : MonoBehaviour
     private bool isSelectingLocation = false; // Indica si estamos en modo de selección de ubicación
 
     [Header("Ability Settings")]
-    Vector2 attackPoint; // El punto de origen del ataque
+    public bool isBase;
+    Vector2 abilityOrigin; // El punto de origen del ataque
     public float attackRange = 5f; // El rango del ataque
     public LayerMask enemyLayers; // Las capas que pueden ser afectadas por el ataque
 
+    GameManager gameManager;
 
     void Start()
     {
+        if (!gameManager)
+            gameManager = FindObjectOfType<GameManager>();
+
         abilityButton.onClick.AddListener(OnAbilityButtonClicked);
     }
 
@@ -26,21 +31,24 @@ public class AbilityButton : MonoBehaviour
         // Si estamos en modo de selección y se hace clic izquierdo
         if (isSelectingLocation && Input.GetMouseButtonDown(0))
         {
-            // Obtiene la posición del ratón en el mundo 2D
-            attackPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            abilityOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // Detectar enemigos en el rango del ataque
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, attackRange, enemyLayers);
+            if (isBase) {
+                
+            } else {
+                // Detectar enemigos en el rango del ataque
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(abilityOrigin, attackRange, enemyLayers);
+
+                // Hacer daño a cada enemigo detectado
+                foreach (Collider2D enemy in hitEnemies)
+                {
+                    Debug.Log("Golpeado " + enemy.name);
+                    Destroy(enemy.gameObject);
+                }
+            }
 
             // Desactiva el modo de selección
             isSelectingLocation = false;
-
-            // Hacer daño a cada enemigo detectado
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                Debug.Log("Golpeado " + enemy.name);
-                Destroy(enemy.gameObject);
-            }
         }
     }
 
@@ -51,9 +59,9 @@ public class AbilityButton : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
+        if (abilityOrigin == null)
             return;
 
-        Gizmos.DrawWireSphere(attackPoint, attackRange);
+        Gizmos.DrawWireSphere(abilityOrigin, attackRange);
     }
 }
