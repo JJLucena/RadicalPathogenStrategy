@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 820771121de51044d839599ab4cad753
-      internalID: 1318907683
+      spriteID: bfaab2b3b7f487e4fb2a3683b32b8179
+      internalID: -31456268
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 238a5b3bf0607ae469e4b2e9872f63bb
-      internalID: 453799443
+      spriteID: 2996dc4261cdda14b8bb62aa743eab53
+      internalID: -1985225764
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c9873fe5777bf4479069adfebe07412
-      internalID: -1698944707
+      spriteID: fd92d3ad1590cd64d987270165f8bd14
+      internalID: -1232479859
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fde67a08e6b9164fa6ade5bc36d8651
-      internalID: -917149759
+      spriteID: b30c2d9010bf4b3469243479e5ae7d76
+      internalID: 1297943406
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Celula TA AN Walk Plataformas 32 X 32_0: 1318907683
-      Celula TA AN Walk Plataformas 32 X 32_1: 453799443
-      Celula TA AN Walk Plataformas 32 X 32_2: -1698944707
-      Celula TA AN Walk Plataformas 32 X 32_3: -917149759
+      Celula TA AN Walk Plataformas 32 X 32_0: -31456268
+      Celula TA AN Walk Plataformas 32 X 32_1: -1985225764
+      Celula TA AN Walk Plataformas 32 X 32_2: -1232479859
+      Celula TA AN Walk Plataformas 32 X 32_3: 1297943406
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
